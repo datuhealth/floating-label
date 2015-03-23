@@ -1,0 +1,41 @@
+{
+  "name": "floating-label",
+  "version": "0.1.0",
+  "description": "A floating label plugin written in vanilla javascript",
+  "main": "floatingLabel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/datuhealth/floating-label.git"
+  },
+  "keywords": [
+    "floating",
+    "label",
+    "label",
+    "input",
+    "forms",
+    "javascript"
+  ],
+  "author": "Mike Engel <mike.engel@datuhealth.com>",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/datuhealth/floating-label/issues"
+  },
+  "homepage": "https://github.com/datuhealth/floating-label",
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "chai": "^2.1.2",
+    "derequire": "^2.0.0",
+    "es5-shim": "^4.1.0",
+    "gulp": "^3.8.11",
+    "gulp-jscs": "^1.4.0",
+    "gulp-jshint": "^1.9.4",
+    "gulp-logwarn": "0.0.7",
+    "gulp-mocha-phantomjs": "^0.5.3",
+    "mocha": "^2.2.1",
+    "pre-commit": "^1.0.6",
+    "uglify-js": "^2.4.17"
+  }
+}
