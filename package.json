@@ -5,7 +5,7 @@
   "main": "floatingLabel.js",
   "scripts": {
     "test": "mkdir tmp; browserify test/index.js > tmp/index.js; gulp test; rm -r tmp",
-    "dist": "browserify isotip.js -s isotip | derequire > dist/isotip.js; browserify isotip.js -s isotip | derequire | uglifyjs - > dist/isotip.min.js"
+    "dist": "browserify floatingLabel.js -s floatingLabel | derequire > dist/floatingLabel.js; browserify floatingLabel.js -s floatingLabel | derequire | uglifyjs - > dist/floatingLabel.min.js"
   },
   "repository": {
     "type": "git",
