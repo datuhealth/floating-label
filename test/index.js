@@ -15,6 +15,8 @@ function eventFire( el, evtType ) {
 
 describe( 'the floating label initial state', function() {
     it( 'should not be floating without a value', function() {
+        floatingLabel.evaluateInputs();
+
         var noValueContainer = document.querySelector( 'div.initial.no-value' ),
             label = noValueContainer.querySelector( 'label' ),
             input = noValueContainer.querySelector( 'input' );
@@ -24,6 +26,8 @@ describe( 'the floating label initial state', function() {
     });
 
     it( 'should be floating with an initial value', function() {
+        floatingLabel.evaluateInputs();
+
         var noValueContainer = document.querySelector( 'div.initial.value' ),
             label = noValueContainer.querySelector( 'label' ),
             input = noValueContainer.querySelector( 'input' );
