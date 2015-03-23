@@ -13,8 +13,24 @@ function eventFire( el, evtType ) {
     }
 }
 
-describe( 'floating label initial state', function() {
-    it( 'should not be showing the label without a value', function() {
-        expect( true ).to.equal( true );
+describe( 'the floating label initial state', function() {
+    it( 'should not be showing without a value', function() {
+        var noValueContainer = document.querySelector( 'div.initial.no-value' ),
+            label = noValueContainer.querySelector( 'label' ),
+            input = noValueContainer.querySelector( 'input' );
+
+        expect( input.value ).to.equal( '' );
+        expect( label.classList.contains( 'floating' )).to.equal( false );
+    });
+
+    it( 'should be showing with an initial value', function() {
+        var noValueContainer = document.querySelector( 'div.initial.value' ),
+            label = noValueContainer.querySelector( 'label' ),
+            input = noValueContainer.querySelector( 'input' );
+
+        console.log( label.classList );
+
+        expect( input.value ).to.equal( 'With value' );
+        expect( label.classList.contains( 'floating' )).to.equal( true );
     });
 });
