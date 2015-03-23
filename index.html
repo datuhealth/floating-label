@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no">
+    <title>floatingLabel.js | A small javascript floating label library</title>
+</head>
+<body>
+    <div class="content">
+        <form method="POST" action="javascript:void(0);" enctype="application/x-www-form-urlencoded">
+            <div class="initial no-value">
+                <label for="no-value">No value</label>
+                <input type="text" name="no-value" id="no-value" placeholder="No value" />
+            </div>
+            <div class="initial value">
+                <label for="value">With value</label>
+                <input type="text" name="value" id="value" value="With value" />
+            </div>
+        </form>
+        <p>Floating Label is licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.</p>
+        <p>Copyright 2015 Datu Health, Inc.</p>
+    </div>
+    <script src="node_modules/es5-shim/es5-shim.min.js"></script>
+    <script src="dist/floatingLabel.js"></script>
+    <script>floatingLabel.init();</script>
+</body>
+</html>
