@@ -4,7 +4,8 @@
   "description": "A floating label plugin written in vanilla javascript",
   "main": "floatingLabel.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mkdir tmp; browserify test/index.js > tmp/index.js; gulp test; rm -r tmp",
+    "dist": "browserify isotip.js -s isotip | derequire > dist/isotip.js; browserify isotip.js -s isotip | derequire | uglifyjs - > dist/isotip.min.js"
   },
   "repository": {
     "type": "git",
