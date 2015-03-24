@@ -4,6 +4,84 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1,user-scalable=no">
     <title>floatingLabel.js | A small javascript floating label library</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            font: normal 16px/1.4 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+        }
+
+        a,
+        label {
+            color: #0074D9;
+            text-decoration: none;
+        }
+
+        label {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            z-index: -1;
+            font-size: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: top 200ms, opacity 200ms;
+        }
+
+        label.floating {
+            top: -2px;
+            z-index: 1;
+            opacity: 1.0;
+        }
+
+        a:hover,
+        a:active {
+            text-decoration: underline;
+        }
+
+        form {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        form div {
+            position: relative;
+        }
+
+        form div + div {
+            margin-top: 20px;
+        }
+
+        input,
+        textarea {
+            display: block;
+            width: 100%;
+            padding: 15px 10px 5px 10px;
+            font-size: 18px;
+            font-size: 1.125rem;
+            background-color: white;
+            border-width: 0 0 1px 0;
+            border-color: #34495E;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #0074D9;
+            outline: none;
+        }
+    </style>
 </head>
 <body>
     <div class="content">
@@ -15,6 +93,14 @@
             <div class="initial value">
                 <label for="value">With value</label>
                 <input type="text" name="value" id="value" value="With value" />
+            </div>
+            <div class="initial no-value textarea">
+                <label for="no-value-textarea">No value on a textarea</label>
+                <textarea name="no-value-textarea" id="no-value-textarea" placeholder="No value"></textarea>
+            </div>
+            <div class="initial value textarea">
+                <label for="value-textarea">No value on a textarea</label>
+                <textarea name="value-textarea" id="value-textarea">With value</textarea>
             </div>
         </form>
         <p>Floating Label is licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.</p>
