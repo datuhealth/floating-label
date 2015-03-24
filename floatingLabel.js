@@ -1,6 +1,7 @@
 module.exports = {
     config: {
-        floatingClassName: 'floating'
+        floatingClassName: 'floating',
+        delegateEvents: true
     },
     init: function initializeFloatingLabel( opt ) {
         'use strict';
@@ -31,19 +32,51 @@ module.exports = {
     evaluateInputs: function evaluateInputs() {
         'use strict';
 
-        var inputs = document.querySelectorAll( 'input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="url"], input[type="tel"], input[type="number"], textarea' );
+        var self = this,
+            inputs = document.querySelectorAll( 'input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="url"], input[type="tel"], input[type="number"], textarea' );
+
+        function showHideLabel( input, label ) {
+            if ( input.value ) {
+                self.addClass( label, self.config.floatingClassName );
+            } else {
+                self.removeClass( label, self.config.floatingClassName );
+            }
+        }
+
+        function inputEventHandler( evt ) {
+            if ( !evt ) {
+                evt = window.event;
+            }
+
+            var inputEl = evt.target || evt.srcElement,
+                labelEl = self.getPreviousSibling( inputEl ),
+                typeRe = /text|password|url|email|tel|search|number/i;
+
+            if ( ( inputEl.nodeName === 'INPUT' && typeRe.test( inputEl.getAttribute( 'type' ))) || inputEl.nodeName === 'TEXTAREA' ) {
+                showHideLabel( inputEl, labelEl );
+            }
+        }
 
         for ( var input in inputs ) {
-            if ( window.Object.hasOwnProperty.call( inputs, input )) {
+            if ( window.Object.hasOwnProperty.call( inputs, input ) && inputs[ input ] instanceof Element ) {
                 var inputEl = inputs[ input ],
                     labelEl = this.getPreviousSibling( inputEl );
 
-                if ( inputEl.value ) {
-                    this.addClass( labelEl, this.config.floatingClassName );
-                } else {
-                    this.removeClass( labelEl, this.config.floatingClassName );
+                showHideLabel( inputEl, labelEl );
+
+                this.removeEventListener( inputEl, 'keypress', inputEventHandler, false );
+                this.removeEventListener( inputEl, 'input', inputEventHandler, false );
+
+                if ( !this.config.delegateEvents ) {
+                    this.addEventListener( inputEl, 'keypress', inputEventHandler, false );
+                    this.addEventListener( inputEl, 'input', inputEventHandler, false );
                 }
             }
+        }
+
+        if ( this.config.delegateEvents ) {
+            this.addEventListener( document.body, 'keypress', inputEventHandler, false );
+            this.addEventListener( document.body, 'input', inputEventHandler, false );
         }
     },
 
