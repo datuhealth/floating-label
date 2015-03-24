@@ -1,6 +1,6 @@
 {
   "name": "floating-label",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A floating label plugin written in vanilla javascript",
   "main": "floatingLabel.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "dist": "browserify floatingLabel.js -s floatingLabel | derequire > dist/floatingLabel.js; browserify floatingLabel.js -s floatingLabel | derequire | uglifyjs - > dist/floatingLabel.min.js"
   },
   "testling": {
-    "harness": "mocha-tdd",
+    "harness": "mocha-bdd",
     "files": "test/*.js",
     "browsers": [
       "ie/8..latest",
