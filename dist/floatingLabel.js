@@ -39,7 +39,7 @@ module.exports = {
             inputs = document.querySelectorAll( 'input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="url"], input[type="tel"], input[type="number"], textarea' );
 
         function showHideLabel( input, label ) {
-            if ( input.value ) {
+            if ( input.value.length ) {
                 self.addClass( label, self.config.floatingClassName );
             } else {
                 self.removeClass( label, self.config.floatingClassName );
@@ -67,18 +67,18 @@ module.exports = {
 
                 showHideLabel( inputEl, labelEl );
 
-                this.removeEventListener( inputEl, 'keypress', inputEventHandler, false );
+                this.removeEventListener( inputEl, 'keyup', inputEventHandler, false );
                 this.removeEventListener( inputEl, 'input', inputEventHandler, false );
 
                 if ( !this.config.delegateEvents ) {
-                    this.addEventListener( inputEl, 'keypress', inputEventHandler, false );
+                    this.addEventListener( inputEl, 'keyup', inputEventHandler, false );
                     this.addEventListener( inputEl, 'input', inputEventHandler, false );
                 }
             }
         }
 
         if ( this.config.delegateEvents && !this._eventsDelegated ) {
-            this.addEventListener( document.body, 'keypress', inputEventHandler, false );
+            this.addEventListener( document.body, 'keyup', inputEventHandler, false );
             this.addEventListener( document.body, 'input', inputEventHandler, false );
 
             this._eventsDelegated = true;
