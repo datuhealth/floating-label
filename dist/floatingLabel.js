@@ -7,6 +7,8 @@ module.exports = {
     init: function initializeFloatingLabel( opt ) {
         'use strict';
 
+        this._eventsDelegated = false;
+
         if ( opt instanceof Object ) {
             for ( var option in opt ) {
                 if ( window.Object.hasOwnProperty.call( opt, option ) && window.Object.hasOwnProperty.call( this.config, option )) {
@@ -75,9 +77,11 @@ module.exports = {
             }
         }
 
-        if ( this.config.delegateEvents ) {
+        if ( this.config.delegateEvents && !this._eventsDelegated ) {
             this.addEventListener( document.body, 'keypress', inputEventHandler, false );
             this.addEventListener( document.body, 'input', inputEventHandler, false );
+
+            this._eventsDelegated = true;
         }
     },
 
