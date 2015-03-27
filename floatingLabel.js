@@ -1,7 +1,7 @@
 module.exports = {
     config: {
         floatingClassName: 'floating',
-        delegateEvents: true
+        delegateEvents: false
     },
     init: function initializeFloatingLabel( opt ) {
         'use strict';
@@ -20,7 +20,7 @@ module.exports = {
         if ( window.addEventListener ) {
             window.addEventListener( 'DOMContentLoaded', this.evaluateInputs.bind( this ), false );
         } else {
-            document.onreadystatechange = this.evaluateInputs;
+            document.onreadystatechange = this.evaluateInputs.bind( this );
         }
     },
 
@@ -59,10 +59,10 @@ module.exports = {
             }
         }
 
-        for ( var input in inputs ) {
-            if ( window.Object.hasOwnProperty.call( inputs, input ) && inputs[ input ] instanceof Element ) {
+        for ( var input = 0; input < inputs.length; input++ ) {
+            if ( ( inputs[ input ] instanceof Element ) && window.Object.hasOwnProperty.call( inputs, input )) {
                 var inputEl = inputs[ input ],
-                    labelEl = this.getPreviousSibling( inputEl );
+                    labelEl = self.getPreviousSibling( inputEl );
 
                 showHideLabel( inputEl, labelEl );
 
