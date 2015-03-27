@@ -19,18 +19,19 @@
             padding: 0;
             margin: 0;
             font: normal 16px/1.4 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+            color: #3F5366;
         }
 
         a,
         label {
-            color: #0074D9;
+            color: #0476FA;
             text-decoration: none;
         }
 
         label {
             position: absolute;
             top: 5px;
-            left: 10px;
+            left: 7px;
             z-index: -1;
             font-size: 12px;
             font-size: 0.75rem;
@@ -40,9 +41,11 @@
         }
 
         label.floating {
-            top: -2px;
+            top: -7px;
             z-index: 1;
+            padding: 0 3px;
             opacity: 1.0;
+            background-color: #FFF;
         }
 
         a:hover,
@@ -51,8 +54,7 @@
         }
 
         form {
-            width: 90%;
-            max-width: 600px;
+            width: 100%;
             margin: 0 auto;
         }
 
@@ -68,12 +70,13 @@
         textarea {
             display: block;
             width: 100%;
-            padding: 15px 10px 5px 10px;
+            padding: 10px;
             font-size: 18px;
             font-size: 1.125rem;
             background-color: white;
-            border-width: 0 0 1px 0;
-            border-color: #34495E;
+            border: 1px solid #95ACC1;
+            border-radius: 3.5px;
+            transition: border 200ms;
         }
 
         input:focus,
@@ -81,28 +84,112 @@
             border-color: #0074D9;
             outline: none;
         }
+
+        pre {
+            overflow: auto;
+        }
+
+        .content {
+            margin: 50px auto 0 auto;
+            padding-bottom: 20px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .logo {
+            display: block;
+            width: 207px;
+            margin: 0 auto 30px auto;
+        }
+
+        .content > p:first-of-type {
+            font-size: 18px;
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        .h1 {
+            margin: 50px 0 0 0;
+            font-weight: 500;
+        }
+
+        dl {
+            margin: 20px 0 40px 0;
+        }
+
+        dt {
+            padding: 5px 10px;
+            font-size: 18px;
+            font-size: 1.125rem;
+            font-weight: bold;
+            border-left: 5px solid #0476FA;
+        }
+
+        dt pre {
+            margin: 0;
+        }
+
+        dd {
+            margin-left: 0;
+        }
+
+        dd p:first-child {
+            margin-top: 10px;
+        }
+
+        dd pre {
+            padding: 10px;
+            font-size: 14px;
+            font-size: 0.875rem;
+            border: 1px solid #95ACC1;
+            border-radius: 3.5px;
+        }
+
+        dd + dt {
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
     <div class="content">
-        <form method="POST" action="javascript:void(0);" enctype="application/x-www-form-urlencoded">
+        <img src="site/floatingLabel.png" class="logo" alt="floatingLabel.js logo">
+        <p>floatingLabel.js is a small javascript library to use the <a href="http://bradfrost.com/blog/post/float-label-pattern/">floating label pattern</a> on your own forms. It's light (1kb minified and gzipped) and <a href="#api">simple</a> to use.</p>
+        <form method="POST" action="javascript:void(0);" enctype="application/x-www-form-urlencoded" role="form">
             <div class="initial no-value">
                 <label for="no-value">No value</label>
                 <input type="text" name="no-value" id="no-value" placeholder="No value" />
             </div>
             <div class="initial value">
-                <label for="value">With value</label>
-                <input type="text" name="value" id="value" value="With value" />
+                <label for="value">Initial value</label>
+                <input type="text" name="value" id="value" value="Initial value" />
             </div>
             <div class="initial no-value textarea">
                 <label for="no-value-textarea">No value on a textarea</label>
                 <textarea name="no-value-textarea" id="no-value-textarea" placeholder="No value"></textarea>
             </div>
             <div class="initial value textarea">
-                <label for="value-textarea">No value on a textarea</label>
-                <textarea name="value-textarea" id="value-textarea">With value</textarea>
+                <label for="value-textarea">Initial value on a textarea</label>
+                <textarea name="value-textarea" id="value-textarea">Initial value</textarea>
             </div>
         </form>
+        <h1 class="h1" id="api">API</h1>
+        <dl>
+            <dt><pre>init( options )</pre></dt>
+            <dd>
+                <p>The init method is a simple function to evaluate all the inputs on a page once the DOM has been loaded. An optional config object can be passed in to set a custom class and whether to delegate events or bind them directly on the inputs themselves.</p>
+                <pre>floatingLabel.init({
+  floatingClassName: 'custom-class', // defaults to 'floating'
+  delegateEvents: true // defaults to false
+});</pre>
+            </dd>
+            <dt><pre>evaluateInputs()</pre></dt>
+            <dd>
+                <p>The meat an potatoes of floatingLabel is in the evaluateInputs method. This will read the DOM and loop through all input or textarea elements on the page. It will either bind events to each input or delegate the events to the body.</p>
+                <p>If you have a single page app and need to bind events to a newly rendered view, run eveluateInputs.</p>
+                <pre>floatingLabel.evaluateInputs();</pre>
+            </dd>
+        </dl>
         <p>Floating Label is licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.</p>
         <p>Copyright 2015 Datu Health, Inc.</p>
     </div>
