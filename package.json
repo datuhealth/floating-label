@@ -34,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/datuhealth/floating-label/issues"
   },
-  "homepage": "https://github.com/datuhealth/floating-label",
+  "homepage": "https://datuhealth.github.io/floating-label/",
   "devDependencies": {
     "browserify": "^9.0.3",
     "chai": "^2.1.2",

@@ -1,0 +1,30 @@
+{
+  "name": "floatingLabel.js",
+  "version": "1.0.0",
+  "homepage": "https://datuhealth.github.io/floating-label/",
+  "authors": [
+    "Mike Engel <mike.engel@datuhealth.com>"
+  ],
+  "description": "A floating label plugin written in vanilla javascript",
+  "main": "dist/floatingLabel.min.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "floating",
+    "label",
+    "label",
+    "form",
+    "input"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
