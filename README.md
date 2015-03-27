@@ -6,6 +6,11 @@
 
 floatingLabel.js is a small javascript library to use the [floating label pattern](http://bradfrost.com/blog/post/float-label-pattern/) on your own forms. It's light (1kb minified and gzipped) and [simple](#api) to use.
 
+```shell
+npm install floating-label
+bower install floatingLabel.js
+```
+
 # example
 
 The only markup needed is either an `input` or a `textarea` element, and some sort of element for the label.
