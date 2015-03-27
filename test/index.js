@@ -30,7 +30,7 @@ describe( 'initialization options', function() {
 
         input.value = 'With value';
 
-        eventFire( input, 'keypress' );
+        eventFire( input, 'keyup' );
 
         expect( input.value ).to.equal( 'With value' );
         expect( label.classList.contains( 'custom-float' )).to.equal( true );
@@ -57,7 +57,7 @@ describe( 'initialization options', function() {
     //
     //     input.value = 'With value';
     //
-    //     eventFire( document.body, 'keypress' );
+    //     eventFire( document.body, 'keyup' );
     //
     //     expect( input.value ).to.equal( 'With value' );
     //     expect( label.classList.contains( 'custom-float' )).to.equal( true );
@@ -131,7 +131,7 @@ describe( 'the label', function() {
 
         input.value = 'New value entered';
 
-        eventFire( input, 'keypress' );
+        eventFire( input, 'keyup' );
 
         expect( input.value ).to.equal( 'New value entered' );
         expect( label.classList.contains( 'floating' )).to.equal( true );
