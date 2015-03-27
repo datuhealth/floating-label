@@ -95,7 +95,6 @@
         ]
     },
     "disallowQuotedKeysInObjects": "allButReserved",
-    "disallowDanglingUnderscores": true,
     "disallowSpaceAfterObjectKeys": true,
     "requireSpaceBeforeObjectValues": true,
     "requireCommaBeforeLineBreak": true,
