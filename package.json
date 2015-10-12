@@ -40,7 +40,7 @@
     "chai": "^2.1.2",
     "derequire": "^2.0.0",
     "es5-shim": "^4.1.0",
-    "gulp": "^3.8.11",
+    "gulp": "^3.9.0",
     "gulp-jscs": "^1.4.0",
     "gulp-jshint": "^1.9.4",
     "gulp-logwarn": "0.0.7",
