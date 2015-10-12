@@ -47,6 +47,6 @@
     "gulp-mocha-phantomjs": "^0.5.3",
     "mocha": "^2.2.1",
     "pre-commit": "^1.0.6",
-    "uglify-js": "^2.4.17"
+    "uglify-js": "^2.5.0"
   }
 }
