@@ -1,7 +1,7 @@
 {
   "name": "floating-label",
-  "version": "1.0.0",
-  "description": "A floating label plugin written in vanilla javascript",
+  "version": "1.0.1",
+  "description": "Ajfloating label plugin written in vanilla javascript",
   "main": "floatingLabel.js",
   "scripts": {
     "test": "mkdir tmp; browserify test/index.js > tmp/index.js; gulp test; rm -r tmp",
