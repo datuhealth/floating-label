@@ -1,24 +1,6 @@
 var gulp = require( 'gulp' ),
     logwarn = require( 'gulp-logwarn' ),
-    jshint = require( 'gulp-jshint' ),
-    jscs = require( 'gulp-jscs' ),
     mocha = require( 'gulp-mocha-phantomjs' );
-
-gulp.task( 'jscs', function scriptsJSCSTask() {
-    'use strict';
-
-    return gulp.src( './floatingLabel.js' )
-        .pipe( jscs());
-});
-
-gulp.task( 'jshint', function scriptsJSHintTask() {
-    'use strict';
-
-    return gulp.src( './floatingLabel.js' )
-        .pipe( jshint())
-        .pipe( jshint.reporter( 'default' ))
-        .pipe( jshint.reporter( 'fail' ));
-});
 
 gulp.task( 'logwarn', function scriptsLogwarnTask() {
     'use strict';
@@ -48,6 +30,6 @@ gulp.task( 'mocha', function scriptsTestTask() {
         }));
 });
 
-gulp.task( 'default', [ 'jscs', 'jshint', 'logwarn', 'mocha' ]);
+gulp.task( 'default', [ 'logwarn', 'mocha' ]);
 
-gulp.task( 'test', [ 'jscs', 'jshint', 'logwarn', 'mocha' ]);
+gulp.task( 'test', [ 'logwarn', 'mocha' ]);
