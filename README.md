@@ -13,7 +13,7 @@ bower install floatingLabel.js
 
 # example
 
-The only markup needed is either an `input` or a `textarea` element, and some sort of element for the label.
+The only markup needed is either an `input` or a `textarea` element, and some sort of element for the label. Since version 2.0, labels _must_ now include the `for` attribute to associate it to an input. Not only is this per the spec & accessible, you can now have inputs without a label, and have the label element somewhere else in the DOM.
 
 ```html
 <form>
@@ -31,7 +31,7 @@ floatingLabel.init({
 });
 ```
 
-If you're running a singple page app and need to re-run floatingLabel when a new view is rendered, use `evaluateInputs`
+If you're running a single page app and need to re-run floatingLabel when a new view is rendered, use `evaluateInputs`
 
 ```javascript
 floatingLabel.evaluateInputs();
@@ -62,7 +62,7 @@ floatingLabel.evaluateInputs();
 
 # contributing
 
-If you would like to contribute, please create a new branch after forking with your changes, then submit a PR to this repo. Please also follow our javascript [styleguide](https://github.com/datuhealth/idiomatic.js).
+If you would like to contribute, please create a new branch after forking with your changes, then submit a PR to this repo. We use [standard](https://github.com/feross/standard) for our javascript styleguide.
 
 # license
 
