@@ -39,7 +39,7 @@ floatingLabel.evaluateInputs();
 
 # api
 
-## `init( options )`
+## `init(options)`
 
 The init method is a simple function to evaluate all the inputs on a page once the DOM has been loaded. An optional config object can be passed in to set a custom class and whether to delegate events or bind them directly on the inputs themselves.
 

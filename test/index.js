@@ -1,160 +1,188 @@
-var floatingLabel = require( '../floatingLabel' ),
-    chai = require( 'chai' ),
-    expect = chai.expect;
+var floatingLabel = require('../floatingLabel')
+var test = require('tape')
 
-function eventFire( el, evtType ) {
-    if ( el.fireEvent ) {
-        el.fireEvent( 'on' + evtType );
-    } else {
-        var evtObj = document.createEvent( 'Events' );
+function eventFire (el, evtType) {
+  if (el.fireEvent) {
+    el.fireEvent('on' + evtType)
+  } else {
+    var evtObj = document.createEvent('Events')
 
-        evtObj.initEvent( evtType, true, false );
-        el.dispatchEvent( evtObj );
-    }
+    evtObj.initEvent(evtType, true, false)
+    el.dispatchEvent(evtObj)
+  }
 }
 
-describe( 'initialization options', function() {
-    it( 'should use a custom class', function() {
-        floatingLabel.init({
-            floatingClassName: 'custom-float'
-        });
+function setupForm () {
+  document.body.innerHTML = [
+    '<form method="POST" action="javascript:void(0);" enctype="application/x-www-form-urlencoded">',
+    '<div class="initial no-value">',
+    '<label for="no-value">No value</label>',
+    '<input type="text" name="no-value" id="no-value" placeholder="No value" />',
+    '</div>',
+    '<div class="initial value">',
+    '<label for="value">With value</label>',
+    '<input type="text" name="value" id="value" value="With value" />',
+    '</div>',
+    '<div class="initial no-value textarea">',
+    '<label for="no-value-textarea">No value on a textarea</label>',
+    '<textarea name="no-value-textarea" id="no-value-textarea" placeholder="No value"></textarea>',
+    '</div>',
+    '<div class="initial value textarea">',
+    '<label for="value-textarea">With value on a textarea</label>',
+    '<textarea name="value-textarea" id="value-textarea">With value</textarea>',
+    '</div>',
+    '<div class="initial no-label">',
+    '<input type="text" name="no-label" id="no-label" placeholder="No label">',
+    '</div>',
+    '<div class="initial no-label textarea">',
+    '<textarea name="no-label-textarea" id="no-label-textarea" placeholder="No label"></textarea>',
+    '</div>',
+    '</form>'
+  ].join('')
+}
 
-        floatingLabel.evaluateInputs();
+test('a custom floating class can be used', function (t) {
+  setupForm()
 
-        var noValueContainer = document.querySelector( 'div.initial.no-value' ),
-            label = noValueContainer.querySelector( 'label' ),
-            input = noValueContainer.querySelector( 'input' );
+  floatingLabel.init({
+    floatingClassName: 'custom-float'
+  })
 
-        expect( input.value ).to.equal( '' );
-        expect( label.classList.contains( 'custom-float' )).to.equal( false );
+  var noValueContainer = document.body.querySelector('div.initial.no-value')
+  var label = noValueContainer.querySelector('label[for="no-value"]')
+  var input = noValueContainer.querySelector('input')
 
-        input.value = 'With value';
+  t.equal(input.value, '', 'there is no default input value')
+  t.notOk(label.classList.contains('custom-float'), 'there is no floating class by default')
 
-        eventFire( input, 'keyup' );
+  input.value = 'With value'
 
-        expect( input.value ).to.equal( 'With value' );
-        expect( label.classList.contains( 'custom-float' )).to.equal( true );
-    });
+  eventFire(input, 'keyup')
 
-    // We skip this test because mocking delegated events is hard
-    // If you have a good way to do it, let us know!
-    // it( 'should delegate events', function() {
-    //     floatingLabel.init({
-    //         floatingClassName: 'custom-float',
-    //         delegateEvents: true
-    //     });
-    //
-    //     var noValueContainer = document.querySelector( 'div.initial.no-value' ),
-    //         label = noValueContainer.querySelector( 'label' ),
-    //         input = noValueContainer.querySelector( 'input' );
-    //
-    //     input.value = '';
-    //
-    //     floatingLabel.evaluateInputs();
-    //
-    //     expect( input.value ).to.equal( '' );
-    //     expect( label.classList.contains( 'custom-float' )).to.equal( false );
-    //
-    //     input.value = 'With value';
-    //
-    //     eventFire( document.body, 'keyup' );
-    //
-    //     expect( input.value ).to.equal( 'With value' );
-    //     expect( label.classList.contains( 'custom-float' )).to.equal( true );
-    // });
-});
+  floatingLabel.evaluateInputs()
 
-describe( 'the floating label initial state', function() {
-    it( 'should not be floating without a value on an input', function() {
-        floatingLabel.init({
-            floatingClassName: 'floating'
-        });
+  t.equal(input.value, 'With value', 'the new value was set correctly')
+  t.ok(label.classList.contains('custom-float'), 'the custom floating class was applied')
+  t.end()
+})
 
-        var noValueContainer = document.querySelector( 'div.initial.no-value' ),
-            label = noValueContainer.querySelector( 'label' ),
-            input = noValueContainer.querySelector( 'input' );
+test('the initial state should not be floating without a value on an input', function (t) {
+  setupForm()
 
-        input.value = '';
+  floatingLabel.init({
+    floatingClassName: 'floating'
+  })
 
-        floatingLabel.evaluateInputs();
+  var noValueContainer = document.querySelector('div.initial.no-value')
+  var label = noValueContainer.querySelector('label[for="no-value"]')
+  var input = noValueContainer.querySelector('input')
 
-        expect( input.value ).to.equal( '' );
-        expect( label.classList.contains( 'floating' )).to.equal( false );
-    });
+  t.equal(input.value, '', 'there is no initial value')
+  t.notOk(label.classList.contains('floating'), 'there shouldn\'t be a floating class')
+  t.end()
+})
 
-    it( 'should be floating with an initial value on an input', function() {
-        floatingLabel.evaluateInputs();
+test('the initial state should be floating with an initial value on an input', function (t) {
+  setupForm()
 
-        var noValueContainer = document.querySelector( 'div.initial.value' ),
-            label = noValueContainer.querySelector( 'label' ),
-            input = noValueContainer.querySelector( 'input' );
+  floatingLabel.evaluateInputs()
 
-        expect( input.value ).to.equal( 'With value' );
-        expect( label.classList.contains( 'floating' )).to.equal( true );
-    });
+  var noValueContainer = document.querySelector('div.initial.value')
+  var label = noValueContainer.querySelector('label[for="value"]')
+  var input = noValueContainer.querySelector('input')
 
-    it( 'should not be floating without a value on a textarea', function() {
-        floatingLabel.evaluateInputs();
+  t.equal(input.value, 'With value', 'there is an initial value on the input')
+  t.ok(label.classList.contains('floating'), 'The floating class is on the label')
+  t.end()
+})
 
-        var noValueContainer = document.querySelector( 'div.initial.no-value.textarea' ),
-            label = noValueContainer.querySelector( 'label' ),
-            input = noValueContainer.querySelector( 'textarea' );
+test('the initial state should not be floating without a value on a textarea', function (t) {
+  setupForm()
 
-        expect( input.value ).to.equal( '' );
-        expect( label.classList.contains( 'floating' )).to.equal( false );
-    });
+  floatingLabel.evaluateInputs()
 
-    it( 'should be floating with an initial value on a textarea', function() {
-        floatingLabel.evaluateInputs();
+  var noValueContainer = document.querySelector('div.initial.no-value.textarea')
+  var label = noValueContainer.querySelector('label[for="no-value-textarea"]')
+  var input = noValueContainer.querySelector('textarea')
 
-        var noValueContainer = document.querySelector( 'div.initial.value.textarea' ),
-            label = noValueContainer.querySelector( 'label' ),
-            input = noValueContainer.querySelector( 'textarea' );
+  t.equal(input.value, '', 'There\'s no initial value in the textarea')
+  t.notOk(label.classList.contains('floating'), 'The label isn\'t floating')
+  t.end()
+})
 
-        expect( input.value ).to.equal( 'With value' );
-        expect( label.classList.contains( 'floating' )).to.equal( true );
-    });
-});
+test('the initial state should be floating with an initial value on a textarea', function (t) {
+  setupForm()
 
-describe( 'the label', function() {
-    it( 'should float as text is entered via keyboard', function() {
-        var noValueContainer = document.querySelector( 'div.initial.no-value' ),
-            label = noValueContainer.querySelector( 'label' ),
-            input = noValueContainer.querySelector( 'input' );
+  floatingLabel.evaluateInputs()
 
-        input.value = '';
+  var noValueContainer = document.querySelector('div.initial.value.textarea')
+  var label = noValueContainer.querySelector('label[for="value-textarea"]')
+  var input = noValueContainer.querySelector('textarea')
 
-        floatingLabel.evaluateInputs();
+  t.equal(input.value, 'With value', 'There\'s an initial value on the textarea')
+  t.ok(label.classList.contains('floating'), 'The label is initialy floating')
+  t.end()
+})
 
-        expect( input.value ).to.equal( '' );
-        expect( label.classList.contains( 'floating' )).to.equal( false );
+test('the label should float as text is entered via keyboard', function (t) {
+  setupForm()
 
-        input.value = 'New value entered';
+  floatingLabel.evaluateInputs()
 
-        eventFire( input, 'keyup' );
+  var noValueContainer = document.querySelector('div.initial.no-value')
+  var label = noValueContainer.querySelector('label[for="no-value"]')
+  var input = noValueContainer.querySelector('input')
 
-        expect( input.value ).to.equal( 'New value entered' );
-        expect( label.classList.contains( 'floating' )).to.equal( true );
-    });
+  t.equal(input.value, '', 'There\'s no initial value on the input')
+  t.notOk(label.classList.contains('floating'), 'The label isn\'t initially floating')
 
-    // We skip this event because mocking the 'input' event is hard
-    // If you have a good way to do it, let us know!
-    // it( 'should float as text is entered via paste', function() {
-    //     floatingLabel.evaluateInputs();
-    //
-    //     var noValueContainer = document.querySelector( 'div.initial.no-value' ),
-    //         label = noValueContainer.querySelector( 'label' ),
-    //         input = noValueContainer.querySelector( 'input' );
-    //
-    //     input.value = '';
-    //     expect( input.value ).to.equal( '' );
-    //     expect( label.classList.contains( 'floating' )).to.equal( false );
-    //
-    //     input.value = 'New value entered';
-    //
-    //     eventFire( input, 'input' );
-    //
-    //     expect( input.value ).to.equal( 'New value entered' );
-    //     expect( label.classList.contains( 'floating' )).to.equal( true );
-    // });
-});
+  input.value = 'New value entered'
+
+  eventFire(input, 'keyup')
+
+  floatingLabel.evaluateInputs()
+
+  t.equal(input.value, 'New value entered', 'The input now has a value')
+  t.ok(label.classList.contains('floating'), 'The label is now floating')
+  t.end()
+})
+
+test('the page should still work if an input has no label', function (t) {
+  setupForm()
+
+  floatingLabel.evaluateInputs()
+
+  var noValueContainer = document.querySelector('div.initial.no-label')
+  var label = noValueContainer.querySelector('label[for="no-label"]')
+  var input = noValueContainer.querySelector('input')
+
+  t.notOk(label, 'There is no label')
+
+  input.value = 'New value entered'
+
+  eventFire(input, 'keyup')
+
+  floatingLabel.evaluateInputs()
+
+  t.end()
+})
+
+test('the page should still work if a textarea has no label', function (t) {
+  setupForm()
+
+  floatingLabel.evaluateInputs()
+
+  var noValueContainer = document.querySelector('div.initial.no-label.textarea')
+  var label = noValueContainer.querySelector('label[for="no-label-textarea"]')
+  var input = noValueContainer.querySelector('textarea')
+
+  t.notOk(label, 'There is no label')
+
+  input.value = 'New value entered'
+
+  eventFire(input, 'keyup')
+
+  floatingLabel.evaluateInputs()
+
+  t.end()
+})
