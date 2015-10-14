@@ -1,7 +1,7 @@
 {
   "name": "floating-label",
   "version": "2.0.0",
-  "description": "Ajfloating label plugin written in vanilla javascript",
+  "description": "A floating label plugin written in vanilla javascript",
   "main": "floatingLabel.js",
   "scripts": {
     "start": "http-server",
@@ -9,13 +9,13 @@
     "dist": "browserify floatingLabel.js -s floatingLabel | derequire > dist/floatingLabel.js; browserify floatingLabel.js -s floatingLabel | derequire | uglifyjs - > dist/floatingLabel.min.js"
   },
   "testling": {
-    "harness": "mocha-bdd",
-    "files": "test/*.js",
+    "files": "test/index.js",
     "browsers": [
       "ie/8..latest",
       "chrome/latest",
       "firefox/latest",
-      "safari/latest"
+      "safari/latest",
+      "opera/latest"
     ]
   },
   "repository": {
@@ -38,14 +38,9 @@
   "homepage": "https://datuhealth.github.io/floating-label/",
   "devDependencies": {
     "browserify": "^11.2.0",
-    "chai": "^3.3.0",
     "derequire": "^2.0.0",
     "es5-shim": "^4.1.0",
-    "gulp": "^3.9.0",
-    "gulp-logwarn": "0.0.8",
-    "gulp-mocha-phantomjs": "^0.10.1",
     "http-server": "^0.8.5",
-    "mocha": "^2.2.1",
     "pre-commit": "^1.0.6",
     "standard": "^5.3.1",
     "tap-spec": "^4.1.0",
