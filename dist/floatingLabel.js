@@ -52,8 +52,13 @@ module.exports = {
             }
 
             var inputEl = evt.target || evt.srcElement,
-                labelEl = self.getPreviousSibling( inputEl ),
+                inputID = inputEl.getAttribute( 'id' ),
+                labelEl = document.querySelector( 'label[for="' + inputID + '"]' ),
                 typeRe = /text|password|url|email|tel|search|number/i;
+
+            if ( !labelEl ) {
+              return;
+            }
 
             if ( ( inputEl.nodeName === 'INPUT' && typeRe.test( inputEl.getAttribute( 'type' ))) || inputEl.nodeName === 'TEXTAREA' ) {
                 showHideLabel( inputEl, labelEl );
@@ -63,7 +68,12 @@ module.exports = {
         for ( var input = 0; input < inputs.length; input++ ) {
             if ( ( inputs[ input ] instanceof Element ) && window.Object.hasOwnProperty.call( inputs, input )) {
                 var inputEl = inputs[ input ],
-                    labelEl = self.getPreviousSibling( inputEl );
+                    inputID = inputEl.getAttribute( 'id' ),
+                    labelEl = document.querySelector( 'label[for="' + inputID + '"]' );
+
+                if ( !labelEl ) {
+                  return;
+                }
 
                 showHideLabel( inputEl, labelEl );
 
