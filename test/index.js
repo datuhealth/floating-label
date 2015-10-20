@@ -1,6 +1,13 @@
 var floatingLabel = require('../floatingLabel')
 var test = require('tape')
 
+Function.prototype.bind = Function.prototype.bind || function (thisp) { // eslint-disable-line
+  var fn = this
+  return function () {
+    return fn.apply(thisp, arguments)
+  }
+}
+
 function eventFire (el, evtType) {
   if (el.fireEvent) {
     el.fireEvent('on' + evtType)

@@ -5,7 +5,7 @@
   "main": "floatingLabel.js",
   "scripts": {
     "start": "http-server",
-    "test": "standard; browserify test/index.js | tape-run | tap-spec",
+    "test": "standard; browserify test/index.js | tape-run -b phantom | tap-spec",
     "dist": "browserify floatingLabel.js -s floatingLabel | derequire > dist/floatingLabel.js; browserify floatingLabel.js -s floatingLabel | derequire | uglifyjs - > dist/floatingLabel.min.js"
   },
   "testling": {
@@ -41,6 +41,7 @@
     "derequire": "^2.0.0",
     "es5-shim": "^4.1.0",
     "http-server": "^0.8.5",
+    "phantomjs": "^1.9.18",
     "pre-commit": "^1.0.6",
     "standard": "^5.3.1",
     "tap-spec": "^4.1.0",
