@@ -39,7 +39,7 @@
   "devDependencies": {
     "browserify": "^11.2.0",
     "derequire": "^2.0.0",
-    "es5-shim": "^4.1.0",
+    "es5-shim": "^4.1.15",
     "http-server": "^0.8.5",
     "phantomjs": "^1.9.18",
     "pre-commit": "^1.0.6",
