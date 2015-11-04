@@ -1,6 +1,6 @@
 language: node_js
 node_js:
   - "node"
-  - "0.10.36"
+  - "4.x"
   - "iojs"
 sudo: false
