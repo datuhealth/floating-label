@@ -1,3 +1,7 @@
+# UNMAINTAINED
+
+This project is no longer being maintained. It's suggested that an alternative be used instead.
+
 # floating-label
 
 > A floating label plugin written in vanilla javascript
